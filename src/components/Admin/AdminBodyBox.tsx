@@ -1,11 +1,9 @@
-import type { ContentType } from "@/types/adminContentsTypes";
 import { AdminBodyMenuMapper } from "./AdminBodyMenuMapper";
+import { useSelectedMenu } from "./StudentList/SelectedMenuContext";
 
-interface AdminBodyBoxProps {
-  selectedMenu: ContentType;
-}
+const AdminBodyBox = () => {
+  const { selectedMenu } = useSelectedMenu();
 
-const AdminBodyBox = ({ selectedMenu }: AdminBodyBoxProps) => {
   return (
     <div className="flex-1 min-h-screen bg-lightPurple rounded-xl">
       {AdminBodyMenuMapper[selectedMenu]}

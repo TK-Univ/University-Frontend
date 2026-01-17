@@ -1,11 +1,9 @@
-import { CONTENT_TYPE, type ContentType } from "@/types/adminContentsTypes";
-import type { Dispatch, SetStateAction } from "react";
+import { CONTENT_TYPE } from "@/types/adminContentsTypes";
+import { useSelectedMenu } from "./StudentList/SelectedMenuContext";
 
-interface SideBarProps {
-  setSelectedMenu: Dispatch<SetStateAction<ContentType>>;
-}
+const SideBar = () => {
+  const { setSelectedMenu } = useSelectedMenu();
 
-const SideBar = ({ setSelectedMenu }: SideBarProps) => {
   return (
     <div className="w-32 min-h-16 flex flex-col justify-start items-center bg-main p-5 rounded-xl">
       <span className="text-white" onClick={() => setSelectedMenu(CONTENT_TYPE.List)}>

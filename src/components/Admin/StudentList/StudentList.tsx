@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import { StudentsListContext } from "./StudentsListProvider";
-import StudentsListRow from "./StudentsListRow";
+import StudentsListRow from "./StudentListRow";
+import { useStudentList } from "./StudentListContext";
 
-const StudentsList = () => {
-  const studentsList = useContext(StudentsListContext);
-  if (!studentsList) return;
+const StudentList = () => {
+  const studentList = useStudentList();
   return (
     <div className="p-5">
       <table className="w-full border-separate border-spacing-y-3 bg-white">
@@ -16,7 +14,7 @@ const StudentsList = () => {
           </tr>
         </thead>
         <tbody>
-          {studentsList.map((student) => {
+          {studentList.map((student) => {
             return <StudentsListRow {...student} key={student.id} />;
           })}
         </tbody>
@@ -25,4 +23,4 @@ const StudentsList = () => {
   );
 };
 
-export default StudentsList;
+export default StudentList;
