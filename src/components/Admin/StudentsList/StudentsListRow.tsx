@@ -5,8 +5,10 @@ interface StudentsListRowProps {
 }
 
 const StudentsListRow = ({ id, name, department }: StudentsListRowProps) => {
+  const clickHandler = () => {};
+
   return (
-    <tr>
+    <tr onClick={clickHandler}>
       <td className="text-center align-middle">{id}</td>
       <td className="text-center align-middle">{name}</td>
       <td className="text-center align-middle">{department}</td>

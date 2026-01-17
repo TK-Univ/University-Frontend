@@ -1,12 +1,14 @@
-import StudentsList from "./StudentsList/StudentsList";
-import { StudentsListProvider } from "./StudentsList/StudentsListProvider";
+import type { ContentType } from "@/types/adminContentsTypes";
+import { AdminBodyMenuMapper } from "./AdminBodyMenuMapper";
 
-const AdminBodyBox = () => {
+interface AdminBodyBoxProps {
+  selectedMenu: ContentType;
+}
+
+const AdminBodyBox = ({ selectedMenu }: AdminBodyBoxProps) => {
   return (
     <div className="flex-1 min-h-screen bg-lightPurple rounded-xl">
-      <StudentsListProvider>
-        <StudentsList />
-      </StudentsListProvider>
+      {AdminBodyMenuMapper[selectedMenu]}
     </div>
   );
 };
