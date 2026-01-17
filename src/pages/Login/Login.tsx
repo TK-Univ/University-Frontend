@@ -12,7 +12,7 @@ const Login = () => {
     try {
       const response = await authApi.login(id, pw);
       console.log("로그인 성공", response);
-      if (response.isSuccess) navigate("/admin");
+      if (response.success) navigate("/admin");
     } catch (err: any) {
       console.error("로그인 실패:", err);
     }
