@@ -1,14 +1,12 @@
-import { CONTENT_TYPE } from "@/types/adminContentsTypes";
-import { useSelectedMenu } from "./StudentList/SelectedMenuContext";
+import { SIDEBAR_MENUS } from "@/constants/sideBar.constants";
+import SideBarRow from "./SideBarRow";
 
 const SideBar = () => {
-  const { setSelectedMenu } = useSelectedMenu();
-
   return (
-    <div className="w-32 min-h-16 flex flex-col justify-start items-center bg-main p-5 rounded-xl">
-      <span className="text-white" onClick={() => setSelectedMenu(CONTENT_TYPE.List)}>
-        학생정보
-      </span>
+    <div className="w-32 min-h-16 flex flex-col justify-start items-center gap-5 bg-main p-5 rounded-xl">
+      {SIDEBAR_MENUS.map((menu) => (
+        <SideBarRow key={menu.id} label={menu.label} value={menu.value} />
+      ))}
     </div>
   );
 };
