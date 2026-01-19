@@ -1,3 +1,4 @@
+import type { LoginResponse } from "@/types/authTypes";
 import { type ApiResponse, client } from "../client";
 
 export const authApi = {
@@ -6,6 +7,6 @@ export const authApi = {
       userId: userId,
       password: password,
     };
-    return await client.post("auth/login", { json: data }).json<ApiResponse<boolean>>();
+    return await client.post("auth/login", { json: data }).json<ApiResponse<LoginResponse>>();
   },
 };

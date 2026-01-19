@@ -13,6 +13,8 @@ const Login = () => {
       const response = await authApi.login(id, pw);
       console.log("로그인 성공", response);
       if (response.success) navigate("/admin");
+      localStorage.setItem("user-name", response.result?.name!);
+      localStorage.setItem("user-auth", response.result?.auth!);
     } catch (err: any) {
       console.error("로그인 실패:", err);
     }
