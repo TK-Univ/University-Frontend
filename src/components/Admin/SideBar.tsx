@@ -1,4 +1,4 @@
-import { SIDEBAR_MENUS } from "@/constants/sideBar.constants";
+import { SIDEBAR_MENUS } from "@/constants/Admin/sideBar.constants";
 import SideBarRow from "./SideBarRow";
 
 const SideBar = () => {
