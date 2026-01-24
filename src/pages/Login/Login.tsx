@@ -1,11 +1,13 @@
 import { authApi } from "@/api/auth/authApi";
 import Logo from "@/assets/Univ-logo.png";
+import PasswordModal from "@/components/Login/PasswordModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const clickHandler = async () => {
@@ -19,11 +21,12 @@ const Login = () => {
       console.error("로그인 실패:", err);
     }
   };
+
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center gap-5 bg-[#f3dbfb]">
       <img src={Logo} alt="학교 로고" className="w-60 h-60" />
       <div className="text-2xl font-extrabold">태규대학교 학사행정시스템</div>
-      <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-[#efdb88] p-3 w-100 h-40">
+      <div className="relative flex flex-col items-center justify-center gap-4 rounded-md bg-gold p-3 w-100 h-50">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row justify-end gap-2">
             <label htmlFor="id">로그인</label>
@@ -49,6 +52,13 @@ const Login = () => {
         <button className="w-full h-12 bg-white text-black cursor-pointer" onClick={clickHandler}>
           로그인하기
         </button>
+        <span
+          className="absolute bottom-2 text-sm underline cursor-pointer"
+          onClick={() => setIsModalOpen(true)}
+        >
+          비밀번호 설정
+        </span>
+        {isModalOpen && <PasswordModal onClose={() => setIsModalOpen(false)} />}
       </div>
     </div>
   );

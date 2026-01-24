@@ -25,12 +25,9 @@ const AdminHeader = () => {
       <div className="flex flex-row items-center relative w-auto">
         <div className="text-white">{userName}님, 환영합니다</div>
         {modalOpen ? (
-          <DownArrow
-            className="w-10 h-10 text-amber-200 cursor-pointer"
-            onClick={modalOpenHandler}
-          />
+          <DownArrow className="w-10 h-10 text-gold cursor-pointer" onClick={modalOpenHandler} />
         ) : (
-          <UpArrow className="w-10 h-10 text-amber-200 cursor-pointer" onClick={modalOpenHandler} />
+          <UpArrow className="w-10 h-10 text-gold cursor-pointer" onClick={modalOpenHandler} />
         )}
         {modalOpen && (
           <div className="absolute top-full mt-1 w-full h-auto p-1 bg-gray-400 rounded-md flex flex-col items-center">
