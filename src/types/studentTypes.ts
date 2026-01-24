@@ -15,6 +15,15 @@ export interface StudentInfo {
   deptName: string;
 }
 
+export interface StudentRegisterDTO {
+  name: string;
+  birth: string;
+  sex: string;
+  status: StudentStatus;
+  contact: string;
+  deptName: string;
+}
+
 //
 
 export const STUDENT_STATUS = {

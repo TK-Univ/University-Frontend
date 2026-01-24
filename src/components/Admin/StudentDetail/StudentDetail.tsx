@@ -27,13 +27,27 @@ const StudentDetail = () => {
     retry: false,
   });
 
+  const deleteClickHandler = () => {
+    const isConfirmed = window.confirm("정말 삭제하시겠습니까?");
+
+    if (!isConfirmed) return;
+  };
+
   const studentData = query.data?.result;
 
   if (query.isLoading) return <div>로딩중...</div>;
   if (!studentData) return <div>데이터가 없습니다.</div>;
 
   return (
-    <div className="w-full p-5">
+    <div className="w-full flex flex-col gap-5 p-5">
+      <div className="w-full">
+        <button
+          className="bg-red-500 text-white p-1 rounded-md cursor-pointer"
+          onClick={deleteClickHandler}
+        >
+          삭제
+        </button>
+      </div>
       <div className="flex flex-row gap-5">
         <img src="" alt="학생 사진" className="w-80 h-100 bg-white rounded-md" />
         <div className="flex-1 grid grid-cols-2">
