@@ -25,8 +25,9 @@ const PasswordModal = ({ onClose }: Props) => {
       if (result.success) {
         alert("인증번호를 전송했습니다!");
         setIsRequestSent(true);
-      }
-    } catch (e) {
+      } else throw Error(result.message);
+    } catch (e: any) {
+      alert(e.message);
       console.error("인증번호 전송 오류");
     }
   };
