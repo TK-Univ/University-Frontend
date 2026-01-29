@@ -1,6 +1,6 @@
 import { CONTENT_TYPE } from "@/types/adminContentsTypes";
-import { useSelectedMenu } from "./SelectedMenuContext";
 import { useSelectedStudent } from "./SelectedStudentContext";
+import { useAdminSelectedMenu } from "../AdminSelectedMenuContext";
 
 interface StudentListRowProps {
   id: number;
@@ -10,7 +10,7 @@ interface StudentListRowProps {
 
 const StudentListRow = ({ id, name, department }: StudentListRowProps) => {
   const { setSelectedId } = useSelectedStudent();
-  const { setSelectedMenu } = useSelectedMenu();
+  const { setSelectedMenu } = useAdminSelectedMenu();
 
   const clickHandler = () => {
     setSelectedId(id);

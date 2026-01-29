@@ -4,7 +4,7 @@ import DownArrow from "@/assets/triangle-down.svg?react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AdminHeader = () => {
+const Header = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const userName = localStorage.getItem("user-name");
@@ -41,4 +41,4 @@ const AdminHeader = () => {
   );
 };
 
-export default AdminHeader;
+export default Header;

@@ -1,10 +1,10 @@
 import AdminBody from "@/components/Admin/AdminBody";
-import AdminHeader from "@/components/Admin/AdminHeader";
+import Header from "@/components/common/Header";
 
 const Admin = () => {
   return (
     <div className="w-full min-h-screen">
-      <AdminHeader />
+      <Header />
       <AdminBody />
     </div>
   );

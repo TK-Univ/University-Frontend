@@ -1,21 +1,15 @@
-import { CONTENT_TYPE, type ContentType } from "@/types/adminContentsTypes";
+import { CONTENT_TYPE } from "@/types/adminContentsTypes";
+import type { SideBarMenu } from "../Admin/adminSideBar.constants";
 
-export interface SideBarMenu {
-  id: number;
-  label: string;
-  value: ContentType;
-  children: SideBarMenu[] | null;
-}
-
-export const SIDEBAR_MENUS: SideBarMenu[] = [
+export const MAIN_SIDEBAR_MENUS: SideBarMenu[] = [
   {
     id: 1,
-    label: "학생정보",
+    label: "학적",
     value: CONTENT_TYPE.List,
     children: [
       {
         id: 1,
-        label: "학생목록",
+        label: "내 학적",
         value: CONTENT_TYPE.List,
         children: null,
       },
@@ -29,25 +23,32 @@ export const SIDEBAR_MENUS: SideBarMenu[] = [
   },
   {
     id: 2,
-    label: "데이터등록",
+    label: "수업",
     value: CONTENT_TYPE.StaffRegister,
     children: [
       {
         id: 1,
-        label: "학생등록",
+        label: "수강신청",
         value: CONTENT_TYPE.StudentRegister,
         children: null,
       },
       {
         id: 2,
-        label: "교수등록",
-        value: CONTENT_TYPE.ProfessorRegister,
+        label: "강의목록",
+        value: CONTENT_TYPE.StudentRegister,
         children: null,
       },
+    ],
+  },
+  {
+    id: 3,
+    label: "성적",
+    value: CONTENT_TYPE.StaffRegister,
+    children: [
       {
-        id: 3,
-        label: "교직원등록",
-        value: CONTENT_TYPE.StaffRegister,
+        id: 1,
+        label: "성적확인",
+        value: CONTENT_TYPE.StudentRegister,
         children: null,
       },
     ],

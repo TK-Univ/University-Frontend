@@ -1,9 +1,7 @@
-import clsx from "clsx";
-import { useSelectedMenu } from "./StudentList/SelectedMenuContext";
-import { CONTENT_TYPE, type ContentType } from "@/types/adminContentsTypes";
+import { type ContentType } from "@/types/adminContentsTypes";
 import SideBarRowChild from "./SideBarRowChild";
 import { useState } from "react";
-import type { SideBarMenu } from "@/constants/Admin/sideBar.constants";
+import type { SideBarMenu } from "@/constants/Admin/adminSideBar.constants";
 
 interface SideBarRowProps {
   label: string;
@@ -23,9 +21,7 @@ const SideBarRow = ({ label, value, children }: SideBarRowProps) => {
       <span className={"text-white cursor-pointer flex-center"} onClick={clickHandler}>
         {label}
       </span>
-      <div>
-        {childrenOpen && children?.map((child) => <SideBarRowChild key={child.id} child={child} />)}
-      </div>
+      <div>{childrenOpen && children?.map((child) => <SideBarRowChild key={child.id} child={child} />)}</div>
     </div>
   );
 };

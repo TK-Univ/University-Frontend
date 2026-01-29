@@ -4,12 +4,14 @@ import Admin from "./pages/Admin/Admin";
 import NotFound from "./pages/NotFound/NotFound";
 import User from "./pages/User/User";
 import Login from "./pages/Login/Login";
+import Main from "./pages/Main/Main";
 
 function App() {
   return (
     <div className="w-full min-h-screen">
       <BrowserRouter>
         <Routes>
+          <Route path="/main" element={<Main />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/" element={<Login />}></Route>
           <Route path="/user" element={<User />}></Route>

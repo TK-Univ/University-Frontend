@@ -1,6 +1,7 @@
 import { authApi } from "@/api/auth/authApi";
 import Logo from "@/assets/Univ-logo.png";
 import PasswordModal from "@/components/Login/PasswordModal";
+import { AUTH } from "@/types/authTypes";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,9 +15,15 @@ const Login = () => {
     try {
       const response = await authApi.login(id, pw);
       console.log("로그인 성공", response);
-      if (response.success) navigate("/admin");
-      localStorage.setItem("user-name", response.result?.name!);
-      localStorage.setItem("user-auth", response.result?.auth!);
+      if (response.success) {
+        localStorage.setItem("user-name", response.result?.name!);
+        localStorage.setItem("user-auth", response.result?.auth!);
+        if (response.result!.auth === AUTH.Admin) {
+          navigate("/admin");
+          return;
+        }
+        navigate("/main");
+      }
     } catch (err: any) {
       console.error("로그인 실패:", err);
     }
@@ -30,32 +37,17 @@ const Login = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-row justify-end gap-2">
             <label htmlFor="id">로그인</label>
-            <input
-              type="text"
-              id="id"
-              className="rounded-md border-2 border-black"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-            />
+            <input type="text" id="id" className="rounded-md border-2 border-black" value={id} onChange={(e) => setId(e.target.value)} />
           </div>
           <div className="flex flex-row justify-end gap-2">
             <label htmlFor="pw">비밀번호</label>
-            <input
-              type="text"
-              id="pw"
-              className="rounded-md border-2 border-black"
-              value={pw}
-              onChange={(e) => setPw(e.target.value)}
-            />
+            <input type="text" id="pw" className="rounded-md border-2 border-black" value={pw} onChange={(e) => setPw(e.target.value)} />
           </div>
         </div>
         <button className="w-full h-12 bg-white text-black cursor-pointer" onClick={clickHandler}>
           로그인하기
         </button>
-        <span
-          className="absolute bottom-2 text-sm underline cursor-pointer"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <span className="absolute bottom-2 text-sm underline cursor-pointer" onClick={() => setIsModalOpen(true)}>
           비밀번호 설정
         </span>
         {isModalOpen && <PasswordModal onClose={() => setIsModalOpen(false)} />}
