@@ -1,22 +1,18 @@
-import { CONTENT_TYPE } from "@/types/adminContentsTypes";
-import type { SideBarMenu } from "../Admin/adminSideBar.constants";
+import { CONTENT_TYPE, type ContentType } from "@/types/mainContentsTypes";
+import type { SideBarMenu } from "../common/sideBar.constants";
 
-export const MAIN_SIDEBAR_MENUS: SideBarMenu[] = [
+export type MainSideBarMenu = SideBarMenu<ContentType>;
+
+export const MAIN_SIDEBAR_MENUS: MainSideBarMenu[] = [
   {
     id: 1,
     label: "학적",
-    value: CONTENT_TYPE.List,
+    value: CONTENT_TYPE.MyInfo,
     children: [
       {
         id: 1,
         label: "내 학적",
-        value: CONTENT_TYPE.List,
-        children: null,
-      },
-      {
-        id: 2,
-        label: "학생상세",
-        value: CONTENT_TYPE.Detail,
+        value: CONTENT_TYPE.MyInfo,
         children: null,
       },
     ],
@@ -24,18 +20,18 @@ export const MAIN_SIDEBAR_MENUS: SideBarMenu[] = [
   {
     id: 2,
     label: "수업",
-    value: CONTENT_TYPE.StaffRegister,
+    value: CONTENT_TYPE.CourseRegister,
     children: [
       {
         id: 1,
         label: "수강신청",
-        value: CONTENT_TYPE.StudentRegister,
+        value: CONTENT_TYPE.CourseRegister,
         children: null,
       },
       {
         id: 2,
         label: "강의목록",
-        value: CONTENT_TYPE.StudentRegister,
+        value: CONTENT_TYPE.CourseRegister,
         children: null,
       },
     ],
@@ -43,12 +39,12 @@ export const MAIN_SIDEBAR_MENUS: SideBarMenu[] = [
   {
     id: 3,
     label: "성적",
-    value: CONTENT_TYPE.StaffRegister,
+    value: CONTENT_TYPE.MyGrade,
     children: [
       {
         id: 1,
         label: "성적확인",
-        value: CONTENT_TYPE.StudentRegister,
+        value: CONTENT_TYPE.MyGrade,
         children: null,
       },
     ],

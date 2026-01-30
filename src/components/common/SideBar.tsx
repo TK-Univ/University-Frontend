@@ -13,12 +13,12 @@
 
 // export default SideBar;
 // src/components/common/SideBar.tsx
-import { type SideBarMenu } from "@/constants/Admin/adminSideBar.constants";
 import SideBarRow from "./SideBarRow";
 import { SideBarProvider } from "./SideBarContext";
+import type { SideBarMenu } from "@/constants/common/sideBar.constants";
 
 interface SideBarProps<T> {
-  source: SideBarMenu[];
+  source: SideBarMenu<T>[];
   selectedMenu: T;
   onMenuSelect: (value: T) => void;
 }
@@ -28,7 +28,7 @@ const SideBar = <T,>({ source, selectedMenu, onMenuSelect }: SideBarProps<T>) =>
     <SideBarProvider value={{ selectedMenu, setSelectedMenu: onMenuSelect }}>
       <div className="w-32 min-h-16 flex flex-col justify-start items-center gap-5 bg-main p-5 rounded-xl">
         {source.map((menu) => (
-          <SideBarRow key={menu.id} label={menu.label} value={menu.value} children={menu.children} />
+          <SideBarRow key={menu.id} label={menu.label} children={menu.children} />
         ))}
       </div>
     </SideBarProvider>

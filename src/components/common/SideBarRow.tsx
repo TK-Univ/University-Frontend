@@ -1,15 +1,13 @@
-import { type ContentType } from "@/types/adminContentsTypes";
+import type { SideBarMenu } from "@/constants/common/sideBar.constants";
 import SideBarRowChild from "./SideBarRowChild";
 import { useState } from "react";
-import type { SideBarMenu } from "@/constants/Admin/adminSideBar.constants";
 
-interface SideBarRowProps {
+interface SideBarRowProps<T> {
   label: string;
-  value: ContentType;
-  children: SideBarMenu[] | null;
+  children: SideBarMenu<T>[] | null;
 }
 
-const SideBarRow = ({ label, value, children }: SideBarRowProps) => {
+const SideBarRow = <T,>({ label, children }: SideBarRowProps<T>) => {
   const [childrenOpen, setChildrenOpen] = useState<boolean>(false);
 
   const clickHandler = () => {

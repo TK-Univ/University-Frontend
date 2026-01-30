@@ -1,13 +1,9 @@
 import { CONTENT_TYPE, type ContentType } from "@/types/adminContentsTypes";
+import type { SideBarMenu } from "../common/sideBar.constants";
 
-export interface SideBarMenu {
-  id: number;
-  label: string;
-  value: ContentType;
-  children: SideBarMenu[] | null;
-}
+export type AdminSideBarMenu = SideBarMenu<ContentType>;
 
-export const ADMIN_SIDEBAR_MENUS: SideBarMenu[] = [
+export const ADMIN_SIDEBAR_MENUS: AdminSideBarMenu[] = [
   {
     id: 1,
     label: "학생정보",

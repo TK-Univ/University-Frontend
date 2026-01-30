@@ -1,8 +1,13 @@
 import { CONTENT_TYPE } from "@/types/adminContentsTypes";
 import clsx from "clsx";
 import { useSideBarContext } from "./SideBarContext";
+import type { SideBarMenu } from "@/constants/common/sideBar.constants";
 
-const SideBarRowChild = ({ child }: { child: any }) => {
+interface SideBarRowChildProps<T> {
+  child: SideBarMenu<T>;
+}
+
+const SideBarRowChild = <T,>({ child }: SideBarRowChildProps<T>) => {
   const { selectedMenu, setSelectedMenu } = useSideBarContext();
 
   const clickHandler = () => {
