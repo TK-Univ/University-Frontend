@@ -16,6 +16,7 @@ const Login = () => {
       const response = await authApi.login(id, pw);
       console.log("로그인 성공", response);
       if (response.success) {
+        localStorage.setItem("user-id", response.result?.id!);
         localStorage.setItem("user-name", response.result?.name!);
         localStorage.setItem("user-auth", response.result?.auth!);
         if (response.result!.auth === AUTH.Admin) {

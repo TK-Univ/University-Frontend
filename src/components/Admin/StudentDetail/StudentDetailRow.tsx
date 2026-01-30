@@ -3,7 +3,7 @@ interface StudentDetailRowProps {
   value: string;
 }
 
-const STUDENT_STATUS_MAP: Record<string, string> = {
+export const STUDENT_STATUS_MAP: Record<string, string> = {
   ENROLLED: "재학",
   ON_LEAVE: "휴학",
   WITHDRAWN: "자퇴",
