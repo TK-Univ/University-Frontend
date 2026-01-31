@@ -1,7 +1,22 @@
+import { useState } from "react";
 import { useLectureList } from "./LectureListContext";
 import LectureListRow from "./LectureListRow";
+import CourseModal from "../CourseModal/CourseModal";
 
 const LectureList = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedLectureId, setSelectedLectureId] = useState<number | undefined>(undefined);
+
+  const modalOpenHandler = (id: number) => {
+    setModalOpen(true);
+    setSelectedLectureId(id);
+  };
+
+  const modalCloseHandler = () => {
+    setModalOpen(false);
+    setSelectedLectureId(undefined);
+  };
+
   const lectureList = useLectureList();
   return (
     <div className="p-5">
@@ -14,10 +29,11 @@ const LectureList = () => {
         </thead>
         <tbody>
           {lectureList.map((lecture) => {
-            return <LectureListRow {...lecture} key={lecture.id} />;
+            return <LectureListRow {...lecture} key={lecture.id} clickHandler={modalOpenHandler} />;
           })}
         </tbody>
       </table>
+      {modalOpen && <CourseModal modalCloseHandler={modalCloseHandler} lectureId={selectedLectureId} />}
     </div>
   );
 };
