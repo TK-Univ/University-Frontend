@@ -22,3 +22,14 @@ export interface DetailLectureInfo {
   maxEnrollCnt: number;
   subjectId: string;
 }
+
+export interface EnrollmentInfo {
+  enrollmentId: number;
+  lectureId: number;
+  lectName: string;
+  professorNames: string[];
+  classroom: string;
+  startTime: string;
+  endTime: string;
+  grade: string;
+}

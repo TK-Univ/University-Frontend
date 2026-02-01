@@ -30,8 +30,8 @@ export const MAIN_SIDEBAR_MENUS: MainSideBarMenu[] = [
       },
       {
         id: 2,
-        label: "강의목록",
-        value: CONTENT_TYPE.CourseRegister,
+        label: "내 강의",
+        value: CONTENT_TYPE.MyCourse,
         children: null,
       },
     ],
