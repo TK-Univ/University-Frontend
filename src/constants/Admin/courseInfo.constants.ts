@@ -14,6 +14,7 @@ export const DETAIL_COURSE_INFO: CourseInfo[] = [
   { id: 4, label: "시작시간", value: "startTime" },
   { id: 5, label: "종료시간", value: "endTime" },
   { id: 6, label: "수강인원", value: "enrollCnt" },
-  { id: 7, label: "학수번호", value: "subjectId" },
-  { id: 8, label: "담당교수", value: "professors" },
+  { id: 7, label: "정원", value: "maxEnrollCnt" },
+  { id: 8, label: "학수번호", value: "subjectId" },
+  { id: 9, label: "담당교수", value: "professors" },
 ];

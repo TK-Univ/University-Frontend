@@ -28,6 +28,7 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
       const response = await lectureApi.register(STUDENT_ID, String(lectureId));
       if (response.success) {
         alert("수강신청 성공!");
+        query.refetch();
         return;
       }
       alert("수강신청 실패!");

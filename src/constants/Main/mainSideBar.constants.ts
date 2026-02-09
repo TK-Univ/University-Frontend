@@ -36,17 +36,4 @@ export const MAIN_SIDEBAR_MENUS: MainSideBarMenu[] = [
       },
     ],
   },
-  {
-    id: 3,
-    label: "성적",
-    value: CONTENT_TYPE.MyGrade,
-    children: [
-      {
-        id: 1,
-        label: "성적확인",
-        value: CONTENT_TYPE.MyGrade,
-        children: null,
-      },
-    ],
-  },
 ];

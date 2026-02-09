@@ -6,7 +6,6 @@ import MyCourse from "./Course/MyCourse/MyCourse";
 
 export const MainBodyMenuMapper: Record<ContentType, JSX.Element> = {
   [CONTENT_TYPE.MyInfo]: <AcademicStatus />,
-  [CONTENT_TYPE.MyGrade]: <CourseRegister />,
   [CONTENT_TYPE.CourseRegister]: <CourseRegister />,
   [CONTENT_TYPE.MyCourse]: <MyCourse />,
 };
