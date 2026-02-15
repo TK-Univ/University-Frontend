@@ -21,7 +21,7 @@ export const options = {
   scenarios: {
     enrollment_scenario: {
       executor: "per-vu-iterations",
-      vus: 100, // 100명이 동시에
+      vus: 1000, // 100명이 동시에
       iterations: 1, // 1인당 1회 실행
       maxDuration: "30s",
     },
