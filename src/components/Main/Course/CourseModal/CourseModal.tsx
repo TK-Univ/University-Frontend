@@ -11,13 +11,12 @@ interface CourseModalProps {
 }
 
 const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
-  // 대기열 상태 관리
-  const [isPolling, setIsPolling] = useState(false); // 폴링 중인지 여부
-  const [queueRank, setQueueRank] = useState<number | null>(null); // 내 대기 순번
-  const [statusMessage, setStatusMessage] = useState(""); // 사용자에게 보여줄 메시지
+  const [isPolling, setIsPolling] = useState(false);
+  const [queueRank, setQueueRank] = useState<number | null>(null);
+  const [statusMessage, setStatusMessage] = useState("");
 
-  // ✅ 1. 타이머 ID와 중복 실행 방지 가드(Guard)를 위한 Ref
   const intervalIdRef = useRef<number | undefined>(undefined);
+  const timeoutIdRef = useRef<number | undefined>(undefined); // ✅ setTimeout 전용 금고 추가
   const isCheckingResultRef = useRef(false);
 
   const query = useQuery({
@@ -46,12 +45,20 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
     }
   };
 
+  // ✅ 상태 초기화 헬퍼 함수
+  const resetPollingState = () => {
+    setIsPolling(false);
+    setQueueRank(null);
+    setStatusMessage("");
+  };
+
+  // ✅ checkFinalResult 로직 개선 (finally 제거)
   const checkFinalResult = async (studentId: string) => {
     if (!lectureId) return;
     setStatusMessage("결과 확인 중...");
 
     try {
-      const result = await lectureApi.getResult(String(lectureId), studentId);
+      const result = await lectureApi.getResult(studentId, String(lectureId));
 
       if (!result) return;
 
@@ -59,20 +66,18 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
         alert("🎉 수강신청 성공!");
         query.refetch();
         modalCloseHandler();
+        resetPollingState(); // 최종 완료 시에만 상태를 초기화합니다.
       } else if (result.startsWith("FAIL")) {
         const reason = result.split(":")[1] || "알 수 없는 오류";
         alert(`😭 수강신청 실패: ${reason}`);
+        resetPollingState(); // 최종 실패 시에만 상태를 초기화합니다.
       } else if (result === "PROCESSING") {
-        setTimeout(() => checkFinalResult(studentId), 1000);
-        return;
+        // 처리 중일 때는 UI를 유지한 채로 1초 뒤에 자기 자신을 다시 호출합니다.
+        timeoutIdRef.current = window.setTimeout(() => checkFinalResult(studentId), 1000);
       }
     } catch (error) {
       alert("결과 확인 중 오류 발생");
-    } finally {
-      setIsPolling(false);
-      setQueueRank(null);
-      setStatusMessage("");
-      // isCheckingResultRef.current = false; // 필요하다면 여기서 초기화 (보통 unmount됨)
+      resetPollingState();
     }
   };
 
@@ -82,18 +87,15 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
       if (!STUDENT_ID || !lectureId) return;
 
       try {
-        const rank = await lectureApi.getOrder(String(lectureId), STUDENT_ID);
+        const rank = await lectureApi.getOrder(STUDENT_ID, String(lectureId));
 
-        // ✅ 2. 수정됨: rank가 0일 때도 정상 처리되도록 조건 변경
-        // (null이나 undefined일 때만 무시)
         if (rank === null || rank === undefined) return;
 
         if (rank === -1) {
-          // ✅ 3. 중복 실행 방지: 이미 결과 확인 중이면 무시
           if (isCheckingResultRef.current) return;
-          isCheckingResultRef.current = true; // 문 잠그기
+          isCheckingResultRef.current = true;
 
-          stopPolling(); // 즉시 타이머 종료
+          stopPolling();
           checkFinalResult(STUDENT_ID);
         } else {
           setQueueRank(rank);
@@ -101,7 +103,7 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
         }
       } catch (error) {
         console.error("Polling error:", error);
-        stopPolling(); // 에러 발생 시 안전하게 종료
+        stopPolling();
         setIsPolling(false);
       }
     };
@@ -120,20 +122,23 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
     };
 
     if (isPolling) {
-      isCheckingResultRef.current = false; // 상태 초기화
+      isCheckingResultRef.current = false;
       startPolling();
     } else {
       stopPolling();
     }
 
+    // ✅ 컴포넌트가 사라질 때 setInterval과 setTimeout을 모두 사살합니다.
     return () => {
       stopPolling();
+      if (timeoutIdRef.current) {
+        window.clearTimeout(timeoutIdRef.current);
+      }
     };
   }, [isPolling, lectureId]);
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={modalCloseHandler}>
-      {/* 로딩 상태거나 폴링 중일 때 오버레이 표시 */}
       {(query.isLoading || isPolling) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 z-60 text-white">
           <div className="text-xl font-bold mb-2">{isPolling ? "수강신청 대기 중..." : "로딩중"}</div>
@@ -146,7 +151,7 @@ const CourseModal = ({ lectureId, modalCloseHandler }: CourseModalProps) => {
           <button
             className={`bg-main text-white rounded-md p-3 cursor-pointer ${isPolling ? "opacity-50 cursor-not-allowed" : ""}`}
             onClick={registerClickHandler}
-            disabled={isPolling} // 대기 중엔 버튼 비활성화
+            disabled={isPolling}
           >
             수강신청
           </button>
