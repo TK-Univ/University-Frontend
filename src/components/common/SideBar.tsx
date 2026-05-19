@@ -26,7 +26,7 @@ interface SideBarProps<T> {
 const SideBar = <T,>({ source, selectedMenu, onMenuSelect }: SideBarProps<T>) => {
   return (
     <SideBarProvider value={{ selectedMenu, setSelectedMenu: onMenuSelect }}>
-      <div className="w-32 min-h-16 flex flex-col justify-start items-center bg-white p-3 rounded-xl">
+      <div className="w-32 min-h-16 flex flex-col justify-start items-center bg-white p-3 rounded-xl border-gray-300 border-2">
         {source.map((menu) => (
           <SideBarRow key={menu.id} label={menu.label} icon={menu.icon} children={menu.children} />
         ))}

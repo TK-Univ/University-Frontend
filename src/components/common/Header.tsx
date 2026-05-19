@@ -1,18 +1,17 @@
-import Logo from "@/assets/Univ-logo.png";
-import UpArrow from "@/assets/triangle-up.svg?react";
-import DownArrow from "@/assets/triangle-down.svg?react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Logo from '@/assets/Univ-logo.png';
+import DownArrowBox from '@/assets/down-arrow-box.svg?react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const userName = localStorage.getItem("user-name");
+  const userName = localStorage.getItem('user-name');
 
   const logoutHandler = () => {
-    localStorage.removeItem("user-name");
-    localStorage.removeItem("user-auth");
-    navigate("/");
+    localStorage.removeItem('user-name');
+    localStorage.removeItem('user-auth');
+    navigate('/');
   };
 
   const modalOpenHandler = () => {
@@ -22,16 +21,16 @@ const Header = () => {
   return (
     <div className="w-full h-24 bg-main flex flex-row items-center justify-between px-5">
       <img src={Logo} alt="" className="w-15 h-15 cursor-pointer" />
-      <div className="flex flex-row items-center relative w-auto">
-        <div className="text-white">{userName}님, 환영합니다</div>
+      <div className="bg-lightPurple flex flex-row gap-3 items-center relative w-auto rounded-2xl p-2">
+        <div className="text-black">{userName}님, 환영합니다</div>
         {modalOpen ? (
-          <DownArrow className="w-10 h-10 text-gold cursor-pointer" onClick={modalOpenHandler} />
+          <DownArrowBox className="w-10 h-10 text-main cursor-pointer" onClick={modalOpenHandler} />
         ) : (
-          <UpArrow className="w-10 h-10 text-gold cursor-pointer" onClick={modalOpenHandler} />
+          <DownArrowBox className="w-10 h-10 text-main cursor-pointer rotate-180" onClick={modalOpenHandler} />
         )}
         {modalOpen && (
-          <div className="absolute top-full mt-1 w-full h-auto p-1 bg-gray-400 rounded-md flex flex-col items-center">
-            <div className="cursor-pointer" onClick={logoutHandler}>
+          <div className="absolute left-0 top-full mt-1 w-full h-auto p-1 bg-gray-200 rounded-2xl border-2 border-gray-400">
+            <div className="cursor-pointer w-full px-2 text-center" onClick={logoutHandler}>
               로그아웃
             </div>
           </div>
