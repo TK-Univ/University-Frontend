@@ -5,7 +5,7 @@ import MainSideBar from './MainSideBar';
 
 const MainBody = () => {
   return (
-    <div className="w-full min-h-screen flex flex-row justify-start gap-5 p-5 bg-lightPurple">
+    <div className="w-full min-h-screen flex flex-row justify-start gap-5 p-5 bg-gray-200">
       <MainSelectedMenuProvider initialValue={CONTENT_TYPE.MyInfo}>
         <MainSideBar />
         <MainBodyBox />

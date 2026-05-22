@@ -1,4 +1,4 @@
-import Logo from '@/assets/Univ-logo.png';
+import Logo from '@/assets/Univ-logo-2.png';
 import DownArrowBox from '@/assets/down-arrow-box.svg?react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +19,9 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-24 bg-main flex flex-row items-center justify-between px-5">
+    <div className="w-full h-24 bg-blue-100 flex flex-row items-center justify-between px-5 drop-shadow-lg">
       <img src={Logo} alt="" className="w-15 h-15 cursor-pointer" />
-      <div className="bg-lightPurple flex flex-row gap-3 items-center relative w-auto rounded-2xl p-2">
+      <div className="bg-gray-200 flex flex-row gap-3 items-center relative w-auto rounded-2xl p-2">
         <div className="text-black">{userName}님, 환영합니다</div>
         {modalOpen ? (
           <DownArrowBox className="w-10 h-10 text-main cursor-pointer" onClick={modalOpenHandler} />

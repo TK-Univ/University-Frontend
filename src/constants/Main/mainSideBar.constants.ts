@@ -17,7 +17,7 @@ export const MAIN_SIDEBAR_MENUS: MainSideBarMenu[] = [
         id: 1,
         label: '공지사항',
         icon: Profile,
-        value: CONTENT_TYPE.MyInfo,
+        value: CONTENT_TYPE.Notification,
         children: null,
       },
     ],
