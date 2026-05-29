@@ -12,5 +12,7 @@ export interface NotificationFormat {
   id: number;
   title: string;
   content: string;
-  writer: string;
+  writerName: string;
+  createdAt: string;
+  updatedAt: string;
 }
